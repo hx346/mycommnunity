@@ -2,6 +2,8 @@ package com.example.mycommunity.controller;
 
 import com.example.mycommunity.dto.AccessTokenDTO;
 import com.example.mycommunity.dto.GitHubUser;
+import com.example.mycommunity.mapper.UserMapper;
+import com.example.mycommunity.modle.User;
 import com.example.mycommunity.provider.GitHubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 @Controller
 public class AuthorizeController {
@@ -23,6 +26,9 @@ public class AuthorizeController {
     private String Client_secret;
     @Value("${github.redirect.uri}")
     private String Redirect_uri;
+
+    @Autowired
+    private UserMapper userMapper;
 
 
     //name为接受的参数名字，后接数据
@@ -41,12 +47,20 @@ public class AuthorizeController {
 
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         System.out.println(accessToken + "ac40");
-        GitHubUser user = gitHubProvider.getUser(accessToken);
-        System.out.println(user.getName());
-        System.out.println(user.getName() + "name");
-        if (user != null) {
+        GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
+        System.out.println(gitHubUser.getName());
+        System.out.println(gitHubUser.getName() + "name");
+        if (gitHubUser != null) {
+            //将githunuser内容写入user
+            User user = new User();
+            user.setToken(UUID.randomUUID().toString());
+            user.setName(gitHubUser.getName());
+            user.setAccounId(String.valueOf(gitHubUser.getId()));
+            user.setGmtCreat(System.currentTimeMillis());
+            user.setGetModifide(user.getGmtCreat());
+            userMapper.insert(user);
             //登陆成功，写cookie和session
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("user", gitHubUser);
             return "redirect:/";
             //跳转回首页
         } else {

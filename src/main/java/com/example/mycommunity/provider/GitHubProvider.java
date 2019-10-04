@@ -26,7 +26,7 @@ public class GitHubProvider {
             String string = response.body().string();
             // System.out.println("response" + string);
             String token = string.split("&")[0].split("=")[1];
-            //System.out.println("token=" + token);
+            System.out.println("token=" + token);
             return token;
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,15 +39,18 @@ public class GitHubProvider {
     public GitHubUser getUser(String accessTokenDTO) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.github.com/user?access_token" + accessTokenDTO)
+                .url("https://api.github.com/user?access_token=" + accessTokenDTO)
                 .build();
-        try (Response response = client.newCall(request).execute()) {
+        System.out.println(request+"=request");
+        try {
+            Response response = client.newCall(request).execute();
             //string接收response
             String string = response.body().string();
+            System.out.println(string);
             //解析成json，创建对象
             GitHubUser gitHubUser = JSON.parseObject(string, GitHubUser.class);
             return gitHubUser;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

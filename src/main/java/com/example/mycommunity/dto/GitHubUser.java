@@ -4,6 +4,7 @@ public class GitHubUser {
     private String name;
     private long id;
     private  String bio;
+    private  String login;
 
     public String getName() {
         return name;
@@ -27,5 +28,23 @@ public class GitHubUser {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    @Override
+    public String toString() {
+        return "GitHubUser{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", bio='" + bio + '\'' +
+                ", login='" + login + '\'' +
+                '}';
     }
 }

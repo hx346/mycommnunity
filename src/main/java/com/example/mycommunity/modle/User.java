@@ -2,11 +2,23 @@ package com.example.mycommunity.modle;
 
 public class User {
     private Integer id;
-    private String name;
-    private String accounId;
+    private String Name;
+    private String accoutid;
     private String token;
-    private long gmtCreat;
-    private long getModifide;
+    private long gmtcreart;
+    private long gmtmodifide;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", Name='" + Name + '\'' +
+                ", accoutid='" + accoutid + '\'' +
+                ", token='" + token + '\'' +
+                ", gmtcreat=" + gmtcreart +
+                ", getmodifide=" + gmtmodifide +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -17,31 +29,20 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public String getAccounId() {
-        return accounId;
+    public String getAccoutid() {
+        return accoutid;
     }
 
-    public void setAccounId(String accounId) {
-        this.accounId = accounId;
+    public void setAccoutid(String accoutid) {
+        this.accoutid = accoutid;
     }
-
-
-
-    public long getGmtCreat() {
-        return gmtCreat;
-    }
-
-    public void setGmtCreat(long gmtCreat) {
-        this.gmtCreat = gmtCreat;
-    }
-
 
     public String getToken() {
         return token;
@@ -51,23 +52,19 @@ public class User {
         this.token = token;
     }
 
-    public long getGetModifide() {
-        return getModifide;
+    public long getGmtcreat() {
+        return gmtcreart;
     }
 
-    public void setGetModifide(long getModifide) {
-        this.getModifide = getModifide;
+    public void setGmtcreat(long gmtcreat) {
+        this.gmtcreart = gmtcreat;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", accounId='" + accounId + '\'' +
-                ", token='" + token + '\'' +
-                ", gmtCreat=" + gmtCreat +
-                ", getGmtCreat=" + getModifide +
-                '}';
+    public long getGetmodifide() {
+        return gmtmodifide;
+    }
+
+    public void setGetmodifide(long getmodifide) {
+        this.gmtmodifide = getmodifide;
     }
 }

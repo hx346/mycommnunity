@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>hexin社区</title>
+    <title>发布</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <script src="js/bootstrap.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="css/MyCommunity.css">
 
 
 </head>
-<body>
+<body background>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -21,8 +22,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+
             <a class="navbar-brand" href="#">hexin</a>
         </div>
+
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -33,11 +36,7 @@
                 </div>
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
-
             <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user!=null}" >
-                    <a href="/publish">发布</a>
-                </li>
 
                 <li class="dropdown" th:if="${session.user!=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -57,6 +56,44 @@
         </div>
     </div>
 </nav>
+<div class="container-fluid main">
+    <div class="row" style="background: white">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <h2>发起</h2>
+            <hr>
+
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title">问题标题</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题。。。。"
+                           th:value="${title}">
+                </div>
+                <div class="form-group">
+                    <label for="description">问题补充</label>
+                    <textarea name="description" id="description" class="form-control" cols="30" rows="10"
+                              th:value="${description}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tag">添加标签</label>
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签，以逗号，分隔"
+                    th:value="${tag}">
+                </div>
+                <div th:text="${error}" class="alert alert-danger" th:if="${error!=null}"></div>
+                <button type="submit" class="btn btn-success btn-publish">发布</button>
+
+
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            发布问题
+            补充问题
+            选择标签
+
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

@@ -18,16 +18,17 @@ public class IndexController {
 
     @Autowired
     private UserMapper userMapper;
+
     @GetMapping("/")
     public String index(HttpServletRequest httpServletRequest) {
         //因为此判断如果name等于"token"字符串，也就是名字跟数据库中token名字相同，那么他的值就是token的value，看看数据库就想通了
         Cookie[] cookies = httpServletRequest.getCookies();
-        for(Cookie cookie:cookies){
-            if (cookie.getName().equals("token")){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("token")) {
                 String token = cookie.getValue();
                 User user = userMapper.findByToken(token);
-                if (user != null){
-                httpServletRequest.getSession().setAttribute("user", user);
+                if (user != null) {
+                    httpServletRequest.getSession().setAttribute("user", user);
                 }
                 break;
             }

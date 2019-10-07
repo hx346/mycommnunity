@@ -5,6 +5,7 @@ import com.example.mycommunity.dto.GitHubUser;
 import com.example.mycommunity.mapper.UserMapper;
 import com.example.mycommunity.modle.User;
 import com.example.mycommunity.provider.GitHubProvider;
+import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,7 @@ public class AuthorizeController {
         GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
         System.out.println(gitHubUser.getName());
         System.out.println(gitHubUser.getName() + "=name");
-        if (gitHubUser != null) {
+        if (gitHubUser != null ) {
             //将githunuser内容写入user
             User user = new User();
             String token = UUID.randomUUID().toString();

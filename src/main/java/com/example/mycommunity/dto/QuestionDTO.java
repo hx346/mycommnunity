@@ -1,9 +1,10 @@
-package com.example.mycommunity.modle;
+package com.example.mycommunity.dto;
 
+import com.example.mycommunity.modle.User;
 import lombok.Data;
 
 @Data
-public class Question {
+public class QuestionDTO {
 
     private Integer id;
     private String title;
@@ -15,5 +16,6 @@ public class Question {
     private Integer viewCount;
     private Integer likeCount;
     private String tag;
+    private User user;
 
 }

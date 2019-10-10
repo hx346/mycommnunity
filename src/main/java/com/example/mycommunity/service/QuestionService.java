@@ -1,5 +1,6 @@
 package com.example.mycommunity.service;
 
+import com.example.mycommunity.dto.PaginationDTO;
 import com.example.mycommunity.dto.QuestionDTO;
 import com.example.mycommunity.mapper.QuestionMapper;
 import com.example.mycommunity.mapper.UserMapper;
@@ -21,11 +22,33 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> list() {
-        List<Question> questionList = questionMapper.list();
-        List<QuestionDTO>questionDTOList = new ArrayList<>();
+    public PaginationDTO list(Integer page, Integer size) {
+
+        Integer totalCount = questionMapper.count();
+        //校验page
+        Integer totalPage;
+        if (totalCount % size == 0) {
+            totalPage = totalCount / size;
+        } else {
+            totalPage = totalCount / size + 1;
+        }
+        //校验page是否合法
+        if (page <= 1) {
+            page = 1;
+        }
+        if (page >= totalPage) {
+            page = totalPage;
+        }
+
+
+        Integer offset = size * (page - 1);
+
+        List<Question> questionList = questionMapper.list(offset, size);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+
+        PaginationDTO paginationDTO = new PaginationDTO();
         for (Question question : questionList) {
-            User user =userMapper.findById(question.getCreator());
+            User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
@@ -33,7 +56,52 @@ public class QuestionService {
 
 
         }
+        paginationDTO.setQuestionDTOS(questionDTOList);
 
-        return questionDTOList;
+        paginationDTO.setPagination(totalCount, page, size);
+
+        return paginationDTO;
+    }
+
+    public PaginationDTO listByUserId(Integer id, Integer page, Integer size) {
+
+        Integer totalCount = questionMapper.countByUserId(id);
+        //校验page
+        Integer totalPage;
+        if (totalCount % size == 0) {
+            totalPage = totalCount / size;
+        } else {
+            totalPage = totalCount / size + 1;
+        }
+        //校验page是否合法
+        if (page <= 1) {
+            page = 1;
+        }
+        if (page >= totalPage) {
+            page = totalPage;
+        }
+
+
+        Integer offset = size * (page - 1);
+
+        List<Question> questionList = questionMapper.listByUserId(id, offset, size);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+
+        PaginationDTO paginationDTO = new PaginationDTO();
+        for (Question question : questionList) {
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question, questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+
+
+        }
+        paginationDTO.setQuestionDTOS(questionDTOList);
+
+        paginationDTO.setPagination(totalCount, page, size);
+
+        return paginationDTO;
+
     }
 }

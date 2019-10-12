@@ -1,10 +1,7 @@
 package com.example.mycommunity.mapper;
 
 import com.example.mycommunity.modle.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +23,7 @@ public interface QuestionMapper {
 
     @Select("select * from question where id = #{id}")
     Question getById(Integer id);
+
+    @Update("UPDATE question SET TITLE=#{title},DESCRIPTION=#{description},GMT_MODIFIED=#{gmtModified},TAG=#{tag}  WHERE id=#{id}")
+    void update(Question question);
 }

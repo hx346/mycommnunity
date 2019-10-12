@@ -1,10 +1,7 @@
 package com.example.mycommunity.mapper;
 
 import com.example.mycommunity.modle.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 
 @Mapper
@@ -18,6 +15,6 @@ public interface UserMapper {
     User findById(@Param("id") Integer id);
     @Select("SELECT * from user WHERE  ACCOUNT_ID= #{accountId}")
     User findByAccountId(String accountId);
-    @Select("UPDATE user SET NAME=#{name},TOKEN=#{token},GMT_MODIFIED=#{gmtModified},AVATAR_URL=#{avatarUrl}  WHERE id=#{id}")
-    void updata(User user);
+    @Update("UPDATE user SET NAME=#{name},TOKEN=#{token},GMT_MODIFIED=#{gmtModified},AVATAR_URL=#{avatarUrl}  WHERE id=#{id}")
+    void update(User user);
 }

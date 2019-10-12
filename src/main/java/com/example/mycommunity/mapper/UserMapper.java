@@ -9,11 +9,15 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
-    @Insert("INSERT INTO USER (NAME,ACCOUNT_ID,TOKEN,GMT_CREATE,GMT_MODIFIED,AVATAR_URL) values (#{Name},#{accoutid},#{token},#{gmtcreat},#{gmtmodifide},#{avatarurl})")
+    @Insert("INSERT INTO USER (NAME,ACCOUNT_ID,TOKEN,GMT_CREATE,GMT_MODIFIED,AVATAR_URL) values (#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified},#{avatarUrl})")
     void insert(User user);
 
     @Select("SELECT * from user WHERE token = #{token}")
     User findByToken(String token);
     @Select("SELECT * from user WHERE  id= #{id}")
     User findById(@Param("id") Integer id);
+    @Select("SELECT * from user WHERE  ACCOUNT_ID= #{accountId}")
+    User findByAccountId(String accountId);
+    @Select("UPDATE user SET NAME=#{name},TOKEN=#{token},GMT_MODIFIED=#{gmtModified},AVATAR_URL=#{avatarUrl}  WHERE id=#{id}")
+    void updata(User user);
 }

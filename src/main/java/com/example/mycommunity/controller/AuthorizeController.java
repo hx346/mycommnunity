@@ -5,6 +5,7 @@ import com.example.mycommunity.dto.GitHubUser;
 import com.example.mycommunity.mapper.UserMapper;
 import com.example.mycommunity.modle.User;
 import com.example.mycommunity.provider.GitHubProvider;
+import com.example.mycommunity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -30,6 +32,8 @@ public class AuthorizeController {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService userService;
 
 
     //name为接受的参数名字，后接数据
@@ -50,18 +54,16 @@ public class AuthorizeController {
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         System.out.println(accessToken + "ac40");
         GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
-        if (gitHubUser != null ) {
-            //将githunuser内容写入user
+        if (gitHubUser != null) {
+            //将gitHubUser内容写入user
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(gitHubUser.getName());
-            user.setAccoutid(String.valueOf(gitHubUser.getId()));
-            user.setGmtcreat(System.currentTimeMillis());
-            user.setGmtmodifide(user.getGmtcreat());
-            user.setAvatarurl(gitHubUser.getAvatar_url());
+            user.setAccountId(String.valueOf(gitHubUser.getId()));
+            user.setAvatarUrl(gitHubUser.getAvatar_url());
             System.out.println(user);
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
             //登陆成功，写cookie和session
             response.addCookie(new Cookie("token", token));
             //request.getSession().setAttribute("user", gitHubUser);
@@ -73,5 +75,17 @@ public class AuthorizeController {
         }
 
 
+    }
+    //退出
+    @GetMapping("/logout")
+    public String logout(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

@@ -1,7 +1,6 @@
 package com.example.mycommunity.mapper;
 
 import com.example.mycommunity.modle.Question;
-import com.example.mycommunity.modle.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +23,7 @@ public interface QuestionMapper {
 
     @Select("select count(1) from QUESTION where creator = #{id}")
     Integer countByUserId(Integer id);
+
+    @Select("select * from question where id = #{id}")
+    Question getById(Integer id);
 }

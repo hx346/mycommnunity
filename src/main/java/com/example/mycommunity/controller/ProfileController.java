@@ -2,7 +2,7 @@ package com.example.mycommunity.controller;
 
 import com.example.mycommunity.dto.PaginationDTO;
 import com.example.mycommunity.mapper.UserMapper;
-import com.example.mycommunity.modle.User;
+import com.example.mycommunity.model.User;
 import com.example.mycommunity.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

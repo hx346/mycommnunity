@@ -29,9 +29,9 @@
 
                 <div class="media" th:each="question : ${pagination.questionDTOS}">
                     <div class="media-left">
-                        <a href="#">
+                        <a href="@{'/question/'+${question.id}}">
                             <img class="media-object img-circle"
-                                 th:src="${question.user.avatarurl}">
+                                 th:src="${question.user.avatarUrl}">
                         </a>
                     </div>
                     <div class="media-body">
@@ -77,8 +77,6 @@
                 </nav>
 
 
-
-
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="list-group section">
@@ -93,8 +91,6 @@
 
         </div>
     </div>
-
-
 
 
 </div>

@@ -1,9 +1,10 @@
 package com.example.mycommunity.controller;
 
 import com.example.mycommunity.dto.QuestionDTO;
-import com.example.mycommunity.modle.Question;
-import com.example.mycommunity.modle.User;
+import com.example.mycommunity.model.Question;
+import com.example.mycommunity.model.User;
 import com.example.mycommunity.service.QuestionService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +22,9 @@ public class PublishController {
     @Autowired
     private QuestionService questionService;
 
+    @NotNull
     @GetMapping("/publish/{id}")
-    private String edit(@PathVariable(name = "id") Integer id,
+    private String edit(@PathVariable(name = "id") int id,
                         Model model) {
         QuestionDTO question = questionService.getById(id);
 
@@ -43,10 +45,10 @@ public class PublishController {
 
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            @RequestParam("tag") String tag,
-            @RequestParam("id") int id,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "tag", required = false) String tag,
+            @RequestParam(value = "id", required = false) Integer id,
             HttpServletRequest httpServletRequest,
             Model model
     ) {

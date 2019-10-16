@@ -20,6 +20,8 @@ public class QuestionController {
     ) {
         //用问题id获取问题
         QuestionDTO questionDTO = questionService.getById(id);
+        //累加阅读数
+        questionService.incView(id);
         //把问题返回给页面
         model.addAttribute("question", questionDTO);
         return "question";

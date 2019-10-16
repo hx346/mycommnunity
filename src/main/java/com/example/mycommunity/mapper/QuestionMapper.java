@@ -2,9 +2,10 @@ package com.example.mycommunity.mapper;
 
 import com.example.mycommunity.model.Question;
 import com.example.mycommunity.model.QuestionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
 
 public interface QuestionMapper {
     /**

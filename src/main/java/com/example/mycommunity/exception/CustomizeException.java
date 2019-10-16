@@ -2,8 +2,10 @@ package com.example.mycommunity.exception;
 
 public class CustomizeException extends RuntimeException {
     private  String message;
+    private  Integer code;
 
     public CustomizeException(InCustomizeErrorCode errorCode) {
+        this.code=errorCode.getCode();
         this.message = errorCode.getMessage();
     }
 
@@ -13,5 +15,7 @@ public class CustomizeException extends RuntimeException {
         return message;
     }
 
-
+    public Integer getCode() {
+        return code;
+    }
 }

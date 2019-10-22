@@ -28,6 +28,7 @@ public class QuestionController {
         //用问题id获取问题
         QuestionDTO questionDTO = questionService.getById(id);
         //
+        List<QuestionDTO> relatedQuestions = questionService.selectRelated(questionDTO);
         List<CommentDTO> comments =commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         //累加阅读数
         questionService.incView(id);
@@ -35,6 +36,7 @@ public class QuestionController {
         model.addAttribute("question", questionDTO);
         //返回commentCreateDTOList
         model.addAttribute("comments", comments);
+        model.addAttribute("relatedQuestions", relatedQuestions);
 
         return "question";
     }

@@ -3,20 +3,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${question.title}"></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="/css/MyCommunity.css">
-    <script src="/js/jquery-3.4.1.min.js" type="application/javascript"></script>
-    <script src="/js/bootstrap.js" type="application/javascript"></script>
-    <script src="/js/community.js" type="application/javascript"></script>
-    <script src="/js/moment.js" type="application/javascript"></script>
-
-
+    <head th:insert="~{import :: head}"></head>
+    <head th:insert="~{import :: markdown}"></head>
 </head>
 
+
 <body>
-<div th:insert="~{navigation :: navigation}"></div>
+<div th:insert="~{navigation :: nav}"></div>
 
 <div th:fragment="que"></div>
 
@@ -40,7 +33,15 @@
 
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <hr>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view" >
+                    <textarea style="display: none" th:text="${question.description}"></textarea>
+                </div>
+
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
 
 
                 <!--标签-->
@@ -110,35 +111,29 @@
 
 
             <!--回复输入框-->
-            <h4>
-                提交回复
-            </h4>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment-sp">
-                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>
+                    提交回复
+                </h4>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment-sp">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">
                     <div class="media">
                         <div class="media-left">
-                            <a th:href="@{'/question/'+${question.id}}">
-                                <img class="media-object img-circle"
-                                     th:src="${question.user.avatarUrl}">
+                            <a href="#">
+                                <img class="media-object img-rounded"
+                                     th:src="${session.user != null ? session.user.avatarUrl : '/images/default-avatar.png'}">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">
-                                <span th:text="${question.user.getName()}"></span>
-                            </h4>
-
-                            <br>
-                            </span>
+                            <h5 class="media-heading">
+                                <span th:text="${session.user != null ? session.user.name : '匿名用户'}"></span>
+                            </h5>
                         </div>
                     </div>
                     <input type="hidden" id="question_id" th:value="${question.id}">
-
                     <textarea class="form-control comment" rows="6" id="comment_content"></textarea>
                     <button type="button" class="btn btn-success btn-comment" onclick="post()">回复</button>
                 </div>
-
-
             </div>
         </div>
 

@@ -1,0 +1,27 @@
+2019-10-24 22:21:44.158  INFO 11395 --- [main] c.e.m.MycommunityApplicationTests        : Starting MycommunityApplicationTests on loxdeMBP.lan with PID 11395 (started by hexin in /Users/hexin/Documents/springboottest/mycommunity)
+2019-10-24 22:21:44.160  INFO 11395 --- [main] c.e.m.MycommunityApplicationTests        : No active profile set, falling back to default profiles: default
+2019-10-24 22:21:44.566  WARN 11395 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2019-10-24 22:21:47.828  INFO 11395 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-24 22:21:47.987  INFO 11395 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-10-24 22:21:48.580  INFO 11395 --- [main] c.e.m.MycommunityApplicationTests        : Started MycommunityApplicationTests in 4.906 seconds (JVM running for 6.065)
+2019-10-24 22:21:49.272  INFO 11395 --- [Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-10-24 22:22:20.060  INFO 11457 --- [restartedMain] c.e.mycommunity.MycommunityApplication   : Starting MycommunityApplication on loxdeMBP.lan with PID 11457 (/Users/hexin/Documents/springboottest/mycommunity/target/classes started by hexin in /Users/hexin/Documents/springboottest/mycommunity)
+2019-10-24 22:22:20.062  INFO 11457 --- [restartedMain] c.e.mycommunity.MycommunityApplication   : No active profile set, falling back to default profiles: default
+2019-10-24 22:22:20.127  INFO 11457 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-10-24 22:22:20.127  INFO 11457 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-10-24 22:22:20.185  WARN 11457 --- [background-preinit] o.s.h.c.j.Jackson2ObjectMapperBuilder    : For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2019-10-24 22:22:22.007  INFO 11457 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (http)
+2019-10-24 22:22:22.040  INFO 11457 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-10-24 22:22:22.040  INFO 11457 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.24]
+2019-10-24 22:22:22.161  INFO 11457 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-10-24 22:22:22.162  INFO 11457 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2035 ms
+2019-10-24 22:22:23.085  INFO 11457 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-24 22:22:23.219  INFO 11457 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-10-24 22:22:23.637  INFO 11457 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-10-24 22:22:23.718  INFO 11457 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (http) with context path ''
+2019-10-24 22:22:23.724  INFO 11457 --- [restartedMain] c.e.mycommunity.MycommunityApplication   : Started MycommunityApplication in 4.073 seconds (JVM running for 4.729)
+2019-10-24 22:22:45.324  INFO 11457 --- [http-nio-9999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-10-24 22:22:45.324  INFO 11457 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-10-24 22:22:45.330  INFO 11457 --- [http-nio-9999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-10-24 22:22:45.380  INFO 11457 --- [http-nio-9999-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-10-24 22:22:45.504  INFO 11457 --- [http-nio-9999-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

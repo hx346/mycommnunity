@@ -1,10 +1,13 @@
 package com.example.mycommunity.intercept;
 
+import com.example.mycommunity.enums.AdPosEnum;
 import com.example.mycommunity.mapper.UserMapper;
 import com.example.mycommunity.model.User;
 import com.example.mycommunity.model.UserExample;
+import com.example.mycommunity.service.AdService;
 import com.example.mycommunity.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,8 +25,19 @@ public class SessionInterceptor implements HandlerInterceptor {
     private UserMapper userMapper;
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private AdService adService;
+
+    @Value("${github.redirect.uri}")
+    private String redirectUri;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //设置 context 级别的属性
+        request.getServletContext().setAttribute("redirectUri", redirectUri);
+        // 没有登录的时候也可以查看导航
+        for (AdPosEnum adPos : AdPosEnum.values()) {
+            request.getServletContext().setAttribute(adPos.name(), adService.list(adPos.name()));
+        }
         //因为此判断如果name等于"token"字符串，也就是名字跟数据库中token名字相同，那么他的值就是token的value，看看数据库就想通了
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0) {
